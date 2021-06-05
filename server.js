@@ -6,12 +6,28 @@ let size = {
 	x: 300,
 	y: 300
 }
-for (i = 0; i < size.x / 5; i++) {
-	foodArray.push({
+
+// Cache food colour map
+let foodColourCache = []
+for (i = 0; i < 50; i++) {
+	foodColourCache.push('#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))
+}
+
+// Quick retrieval of random value from colour cache
+function getRandomColour() {
+	return foodColourCache[Math.floor(Math.random() * foodColourCache.length)];
+}
+
+function getNewFood() {
+	return {
 		x: Math.floor(Math.random() * size.x),
 		y: Math.floor(Math.random() * size.y),
-		colour: '#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6)
-	})
+		colour: getRandomColour()
+	}
+}
+
+for (i = 0; i < size.x / 5; i++) {
+	foodArray.push(getNewFood());
 };
 
 // Start networking
@@ -39,7 +55,7 @@ function connectionEvent(socket) {
 				x: 0,
 				y: 0
 			},
-			colour: '#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6),
+			colour: getRandomColour(),
 			username: recievedUsername
 		};
 	
@@ -86,11 +102,7 @@ function tickLoop() {
 				io.sockets.emit('foodEaten', foodIndex);
 				
 				while (foodArray.length < size.x / 5) {
-					let food = {
-						x: Math.floor(Math.random() * size.x),
-						y: Math.floor(Math.random() * size.y),
-						colour: '#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6)
-					};
+					let food = getNewFood();
 					foodArray.push(food);
 					io.sockets.emit('foodGenerated', food);
 				};
@@ -112,7 +124,7 @@ function tickLoop() {
 			smallerPlayer = playerContainer[playerCache[i]].size < playerContainer[playerCache[j]].size ? playerCache[i] : playerCache[j]
 			
 			if (calculateDistance(playerContainer[smallerPlayer], playerContainer[largerPlayer]) < playerContainer[largerPlayer].size / 2) {
-				console.log(smallerPlayer + ' got eaten')
+				console.log(smallerPlayer + ' was eaten by ' + largerPlayer)
 				let data = {
 					eatenPlayerId: smallerPlayer,
 					eatingPlayerId: largerPlayer,
