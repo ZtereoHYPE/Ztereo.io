@@ -17,16 +17,19 @@ class Client {
         if (this.status == 1) {
             fill('darkred')
             textSize(50)
-            text('You got eaten!', windowWidth / 2 - 160, windowHeight / 2);
+            text('You got eaten!', windowWidth / 2, windowHeight / 2);
+            textSize(26);
+            fill(theme.secondaryText);
+            text('If you want to play again, refresh the page.', windowWidth / 2, windowHeight / 2 + 60);
             return true;
         } else if (client.status == 2) {
             background(theme.background);
             fill(theme.text)
             textSize(50)
-            text('You are disconnected from the server', windowWidth / 2 - 380, windowHeight / 2);
+            text('You are disconnected from the server', windowWidth / 2, windowHeight / 2);
             textSize(26);
-            fill(0, 102, 153, Math.sin(frameCount / 10) * 128 + 127);
-            text('Connecting...', windowWidth / 2 - 50, windowHeight / 2 + 60);
+            fill(theme.secondaryText);
+            text('If you want to play again, refresh the page.', windowWidth / 2, windowHeight / 2 + 60);
             return true;
         }
     };
@@ -59,7 +62,7 @@ class Client {
 		text('Camera X, Y: ' + Math.floor(this.camera.x) + ' , ' + Math.floor(this.camera.y), 10, 60);
 		text('Frame: ' + frameCount, 10, 80);
 		text('Players count: ' + this.playerArray.length, 10, 100);
-		text('Total Food/Rendered Food: ' + this.foodArray.length + '/' + renderedFood, 10, 120);
+		text('Rendered/Total Food: ' + renderedFood + '/' + this.foodArray.length, 10, 120);
 		text('Frames: ' + Math.floor(frameRate()), 10, 140);
 		text('Size: ' + this.playerArray[this.playerArray.map((player) => { return player.id }).indexOf(this.id)].size, 10, 160);
     };
