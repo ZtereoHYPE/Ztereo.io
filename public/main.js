@@ -3,7 +3,7 @@ let client;
 let theme;
 setTheme();
 
-window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {setTheme()})
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { setTheme() })
 
 function setTheme() {
 	let documentStyles = getComputedStyle(document.documentElement)
@@ -20,7 +20,9 @@ new p5();
 function setup() {
 	frameRate(60);
 	createCanvas(windowWidth, windowHeight);
-	socket = io.connect('http://localhost:3000');
+	socket = io.connect('http://localhost:3000', {
+		reconnection: false
+	});
 
 	socket.emit('username', username)
 
@@ -74,7 +76,7 @@ function setup() {
 		}
 
 	})
-	socket.on('disconnect', () => client.status = 2)
+	socket.on('disconnect', () => client.status = 2);
 };
 
 function draw() {
@@ -82,7 +84,7 @@ function draw() {
 		background(theme.background);
 		textSize(26);
 		fill(0, 102, 153, Math.sin(frameCount / 10) * 128 + 127);
-		text('Connecting...', windowWidth / 2 - 50, windowHeight / 2 + 60);
+		text('Connecting...', windowWidth / 2, windowHeight / 2 + 60);
 		return;
 	}
 
