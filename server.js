@@ -3,20 +3,20 @@ let foodArray = []
 let playerContainer = {};
 let deletedPlayersQueue = []
 let size = {
-	x: 300,
-	y: 300
-}
+	x: 3000,
+	y: 3000
+};
 
 // Cache food colour map
 let foodColourCache = []
 for (i = 0; i < 50; i++) {
 	foodColourCache.push('#' + ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6))
-}
+};
 
 // Quick retrieval of random value from colour cache
 function getRandomColour() {
 	return foodColourCache[Math.floor(Math.random() * foodColourCache.length)];
-}
+};
 
 function getNewFood() {
 	return {
@@ -24,7 +24,7 @@ function getNewFood() {
 		y: Math.floor(Math.random() * size.y),
 		colour: getRandomColour()
 	}
-}
+};
 
 for (i = 0; i < size.x / 5; i++) {
 	foodArray.push(getNewFood());
