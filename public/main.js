@@ -20,7 +20,7 @@ new p5();
 function setup() {
 	frameRate(60);
 	createCanvas(windowWidth, windowHeight);
-	socket = io.connect('http://localhost:3000', {
+	socket = io.connect('http://81.240.64.77:3000', {
 		reconnection: false
 	});
 
@@ -84,7 +84,7 @@ function draw() {
 		background(theme.background);
 		textSize(26);
 		fill(0, 102, 153, Math.sin(frameCount / 10) * 128 + 127);
-		text('Connecting...', windowWidth / 2, windowHeight / 2 + 60);
+		text('Connecting...', windowWidth / 2, windowHeight / 2);
 		return;
 	}
 
