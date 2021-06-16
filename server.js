@@ -33,6 +33,7 @@ for (i = 0; i < size.x / 5; i++) {
 // Start networking
 const express = require('express');
 const socket = require('socket.io');
+const { code } = require('statuses');
 const app = express();
 const server = app.listen(3000);
 const io = socket(server);
@@ -174,5 +175,9 @@ function normalizeCoordinates(player) {
 setInterval(tickLoop, 50);
 
 process.on('unhandledRejection', error => {
-    console.error('Unhandled promise rejection:', error);
+	console.error('Unhandled promise rejection:', error);
 });
+
+setTimeout(() => {
+	process.exit(5)
+}, 1000 * 60 * 60 * 24)
