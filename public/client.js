@@ -36,7 +36,7 @@ class Client {
 
     adjustZoom() {
         let idealZoom = 30 / client.playerArray[client.playerArray.map((player) => { return player.id }).indexOf(client.id)].size + 0.7
-        let zoomDifference = Math.abs((idealZoom - client.camera.zoom) / 20)
+        let zoomDifference = Math.abs(idealZoom - client.camera.zoom) / 20
         if (client.camera.zoom < idealZoom) {
             if (zoomDifference < 0.0000001) {
                 client.camera.zoom = idealZoom;
@@ -58,7 +58,7 @@ class Client {
 		fill(theme.accent);
 		text('Debug Data', 10, 20);
 		fill(theme.secondaryText);
-		text('Zoom/zoomDifference: ' + this.camera.zoom + '/' + (this.camera.zoom - (20 / this.playerArray[this.playerArray.map((player) => { return player.id }).indexOf(this.id)].size + 0.7)), 10, 40);
+		text('Zoom/zoomDifference: ' + this.camera.zoom + '/' + Math.abs((30 / client.playerArray[client.playerArray.map((player) => { return player.id }).indexOf(client.id)].size + 0.7) - client.camera.zoom)/20, 10, 40);
 		text('Camera X, Y: ' + Math.floor(this.camera.x) + ' , ' + Math.floor(this.camera.y), 10, 60);
 		text('Frame: ' + frameCount, 10, 80);
 		text('Players count: ' + this.playerArray.length, 10, 100);

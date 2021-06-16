@@ -93,7 +93,6 @@ function draw() {
 	renderedFood = 0;
 	for (food of client.foodArray) {
 		food.display()
-		renderedFood++;
 	}
 
 	for (player of client.playerArray) {
