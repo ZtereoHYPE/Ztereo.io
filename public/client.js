@@ -52,20 +52,26 @@ class Client {
         }
     };
 
-    renderDebugMode() {
-        textAlign(LEFT)
-		textSize(16);
-		fill(theme.accent);
-		text('Debug Data', 10, 20);
-		fill(theme.secondaryText);
-		text('Zoom/zoomDifference: ' + this.camera.zoom + '/' + Math.abs((30 / client.playerArray[client.playerArray.map((player) => { return player.id }).indexOf(client.id)].size + 0.7) - client.camera.zoom)/20, 10, 40);
-		text('Camera X, Y: ' + Math.floor(this.camera.x) + ' , ' + Math.floor(this.camera.y), 10, 60);
-		text('Frame: ' + frameCount, 10, 80);
-		text('Players count: ' + this.playerArray.length, 10, 100);
-		text('Rendered/Total Food: ' + renderedFood + '/' + this.foodArray.length, 10, 120);
-		text('Frames: ' + Math.floor(frameRate()), 10, 140);
-		text('Size: ' + this.playerArray[this.playerArray.map((player) => { return player.id }).indexOf(this.id)].size, 10, 160);
-    };
+    drawHud() {
+        if (client.debugMode) {
+            textAlign(LEFT)
+            textSize(16);
+            fill(theme.accent);
+            text('Debug Data', 10, 20);
+            fill(theme.secondaryText);
+            text('Zoom/zoomDifference: ' + this.camera.zoom + '/' + Math.abs((30 / client.playerArray[client.playerArray.map((player) => { return player.id }).indexOf(client.id)].size + 0.7) - client.camera.zoom)/20, 10, 40);
+            text('Camera X, Y: ' + Math.floor(this.camera.x) + ' , ' + Math.floor(this.camera.y), 10, 60);
+            text('Frame: ' + frameCount, 10, 80);
+            text('Players count: ' + this.playerArray.length, 10, 100);
+            text('Rendered/Total Food: ' + renderedFood + '/' + this.foodArray.length, 10, 120);
+            text('Frames: ' + Math.floor(frameRate()), 10, 140);
+            text('Size: ' + this.playerArray[this.playerArray.map((player) => { return player.id }).indexOf(this.id)].size, 10, 160);
+        };
+        textAlign(RIGHT)
+        textSize(24);
+        fill(theme.accent);
+        text('Score: ' + Math.round(this.playerArray[client.playerArray.map((player) => { return player.id; }).indexOf(this.id)].size.toString() - 20), windowWidth - 60, 40);
+    }
 
     drawMap() {
         background(theme.background);
