@@ -24,6 +24,11 @@ function setup() {
 		reconnection: false
 	});
 
+	// uncomment this and comment above for localhost playing
+	// socket = io.connect('http://localhost:3000', {
+	// 	reconnection: false
+	// });
+
 	socket.emit('username', username)
 
 	socket.on('gameData', (recievedData) => {
@@ -81,6 +86,7 @@ function setup() {
 
 function draw() {
 	if (!client) {
+		textAlign(CENTER, CENTER)
 		background(theme.background);
 		textSize(26);
 		fill(0, 102, 153, Math.sin(frameCount / 10) * 128 + 127);
@@ -113,9 +119,7 @@ function draw() {
 		client.playerArray[client.playerArray.map((player) => { return player.id }).indexOf(client.id)].emitRotation();
 	};
 
-	if (client.debugMode) {
-		client.renderDebugMode();
-	};
+	client.drawHud();
 }
 
 function keyPressed() {
