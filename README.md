@@ -8,7 +8,11 @@ At this point this project is close to be completed. The repo will be left open 
 If the project is up and running you should be able to find it at io.ztereohype.codes (not yet). Else, you can always download it and execute it with `node server_manager.js`
 
 ## TODOs
-- Make an UI where players can connect and choose name and where they end up when dying.
+- Make dead players end up in the rejoining screen after a while.
+- Add protection for when there are too many players.
+- Fix the issue on mobile where the website scrolls / remove everything when the website loads.
+- Make the server use https and ssl certificates please.
+- Use the subdomain (io.ztereohype.codes).
 
 ## TODON'Ts
 - Splitting and merging. Don't even think of that nightmare. (I do accept contributions though)
