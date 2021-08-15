@@ -20,14 +20,14 @@ new p5();
 function setup() {
 	frameRate(60);
 	createCanvas(windowWidth, windowHeight);
-	socket = io.connect('http://81.240.64.77:3000', {
-		reconnection: false
-	});
-
-	// uncomment this and comment above for localhost playing
-	// socket = io.connect('http://localhost:3000', {
+	// socket = io.connect('http://81.240.64.77:3000', {
 	// 	reconnection: false
 	// });
+
+	// uncomment this and comment above for localhost playing
+	socket = io.connect('http://localhost:3000', {
+		reconnection: false
+	});
 
 	socket.emit('username', username)
 
@@ -105,10 +105,8 @@ function draw() {
 		player.interpolateLocation()
 		if (player.id == client.id) {
 			player.updateLocalClientData()
-			player.display()
-		} else {
-			player.display()
 		}
+		player.display()
 	}
 
 	if (client.checkStatus()) return;
